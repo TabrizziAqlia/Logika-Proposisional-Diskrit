@@ -1,0 +1,66 @@
+# =======================================================
+# Implementasi Logika Proposisional di Python
+# Output akan menampilkan tabel kebenaran yang rapi dalam format Markdown
+# =======================================================
+
+def to_bool(val):
+    """Mengubah string 'T'/'F' menjadi Boolean"""
+    return val.upper() == 'T'
+
+def to_str(val):
+    """Mengubah Boolean menjadi 'T' (True) atau 'F' (False)"""
+    return 'T' if val else 'F'
+
+def negasi(p):
+    """¬p"""
+    return not p
+
+def konjungsi(p, q):
+    """p ∧ q"""
+    return p and q
+
+def disjungsi_inklusif(p, q):
+    """p ∨ q"""
+    return p or q
+
+def disjungsi_eksklusif(p, q):
+    """p ⊕ q (XOR)"""
+    return p != q
+
+def implikasi(p, q):
+    """p → q (jika p, maka q)"""
+    return (not p) or q
+
+def biimplikasi(p, q):
+    """p ↔ q (p jika dan hanya jika q)"""
+    return p == q
+
+# =======================================================
+# Generator Tabel Kebenaran (Output Rapi)
+# =======================================================
+
+INPUTS = [
+    ('T', 'T'),
+    ('T', 'F'),
+    ('F', 'T'),
+    ('F', 'F'),
+]
+
+print("## Tabel Kebenaran Logika Proposisional\n")
+print("| p | q | ¬p | p ∧ q | p ∨ q | p ⊕ q | p → q | p ↔ q |")
+print("|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|")
+
+for p_str, q_str in INPUTS:
+    p = to_bool(p_str)
+    q = to_bool(q_str)
+    
+    results = [
+        to_str(negasi(p)),
+        to_str(konjungsi(p, q)),
+        to_str(disjungsi_inklusif(p, q)),
+        to_str(disjungsi_eksklusif(p, q)),
+        to_str(implikasi(p, q)),
+        to_str(biimplikasi(p, q)),
+    ]
+    
+    print(f"| {p_str} | {q_str} | {' | '.join(results)} |")
